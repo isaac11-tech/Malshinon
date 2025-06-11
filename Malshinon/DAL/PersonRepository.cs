@@ -4,9 +4,9 @@ using Malshinon.Models;
 
 namespace Malshinon.DAL
 {
-    public class PersonRepository
+    public static class PersonRepository
     {
-        private Person? DictionaryToPerson(List<Dictionary<string, object?>> result)//convert from Dictionary to string
+        private static Person? DictionaryToPerson(List<Dictionary<string, object?>> result)//convert from Dictionary to string
         {
             if (result.Count == 0)// check if person exist
             {
@@ -30,7 +30,7 @@ namespace Malshinon.DAL
            
         }
 
-        public Person? GetById(int id)
+        public static Person? GetById(int id)
         {
             string sql = $"SELECT * FROM `people` WHERE id = '{id}'";
 
@@ -39,9 +39,10 @@ namespace Malshinon.DAL
             return DictionaryToPerson(result);
         }
 
-        public Person? GetByName(string name)
+        public static Person? GetByName(string name)
         {
-            string sql = $"SELECT * FROM `people` WHERE FullName = '{name}'";
+
+            string sql = $"SELECT * FROM `people` WHERE FullName = '{name}' LIMIT 1";//need to fix
 
             var result = DBConnection.Execute(sql);
 
@@ -49,7 +50,7 @@ namespace Malshinon.DAL
         }
 
 
-        public Person? GetBySecretCode(string secretCode)
+        public static Person? GetBySecretCode(string secretCode)
         {
             string sql = $"SELECT * FROM `people` WHERE SecretCode = '{secretCode}'";
 
@@ -60,14 +61,14 @@ namespace Malshinon.DAL
 
 
 
-        public bool FullNameCodeExists(string fullName)
+        public static bool FullNameCodeExists(string fullName)
         {
             string sql = $"SELECT * FROM `people` WHERE FullName = '{fullName}'";
             var result = DBConnection.Execute(sql);
             return result.Count > 0;
         }
 
-        public bool SecretCodeExists (string secretCode)
+        public static bool SecretCodeExists (string secretCode)
         {
             string sql = $"SELECT * FROM `people` WHERE SecretCode = '{secretCode}'";
             var result = DBConnection.Execute(sql);
@@ -75,7 +76,7 @@ namespace Malshinon.DAL
         }
 
 
-        public void Insert(string fullName, string secretCode)
+        public static void Insert(string fullName, string secretCode)
         {
             string sql = "INSERT INTO people (FullName,SecretCode)" +
                          $"VALUES ('{fullName}','{secretCode}')";
@@ -94,7 +95,7 @@ namespace Malshinon.DAL
             Console.WriteLine($"{fullName} insert to the DB");
         }
 
-        public Person GetOrCreateByName(string fullName)
+        public static Person GetOrCreateByName(string fullName)
         {
 
             if (FullNameCodeExists(fullName))// if all ready exist return the person
@@ -117,7 +118,7 @@ namespace Malshinon.DAL
 
 
 
-        public string? GetSecretCodeByName(string fullName)
+        public static string? GetSecretCodeByName(string fullName)
         {
             var secretCode = "";
             string sql = $"SELECT SecretCode FROM `people` WHERE FullName = '{fullName}'";
