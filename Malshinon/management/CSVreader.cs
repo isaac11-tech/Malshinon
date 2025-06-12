@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Malshinon.DAL;
+using Malshinon.Models;
 
 namespace Malshinon.management
 {
@@ -40,9 +41,9 @@ namespace Malshinon.management
                 var text = parts[2];
                 if (!DateTime.TryParse(parts[3], null, System.Globalization.DateTimeStyles.AssumeLocal, out var ts)) continue;
                 if (string.IsNullOrWhiteSpace(reporter) || string.IsNullOrWhiteSpace(target) || string.IsNullOrWhiteSpace(text)) continue;
-                int reporterId = PersonRepository.GetOrCreateByName(reporter).Id;
-                int targetId = PersonRepository.GetOrCreateByName(target).Id;
-                //ReportRepository.create(reporterId, targetId, text);
+                Person reporterP = PersonRepository.GetById(reporter);
+                Person targetP = PersonRepository.GetById(target);
+                ReportRepository.create(reporterP, targetP, text);
                 count++;
                 //AlertsDAL.CheckAndTriggerAlerts(targetId);
             }

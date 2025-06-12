@@ -34,3 +34,4 @@ C:\Users\Admin\source\repos\Malshinon\Malshinon\obj\Debug\net9.0\refint\Malshino
 C:\Users\Admin\source\repos\Malshinon\Malshinon\obj\Debug\net9.0\Malshinon.pdb
 C:\Users\Admin\source\repos\Malshinon\Malshinon\obj\Debug\net9.0\Malshinon.genruntimeconfig.cache
 C:\Users\Admin\source\repos\Malshinon\Malshinon\obj\Debug\net9.0\ref\Malshinon.dll
+C:\Users\Admin\source\repos\Malshinon\Malshinon\obj\Debug\net9.0\Malshinon.sourcelink.json

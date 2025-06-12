@@ -30,7 +30,7 @@ namespace Malshinon.DAL
            
         }
 
-        public static Person? GetById(int id)
+        public static Person? GetById(string? id)
         {
             string sql = $"SELECT * FROM `people` WHERE id = '{id}'";
 
